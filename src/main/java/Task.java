@@ -1,14 +1,16 @@
-public class Task {
-    private String taskDescription;
+public abstract class Task {
+    private  String taskDescription;
+    private int taskId;
     private boolean isDone;
 
-    Task(String taskDescription){
+    Task(String taskDescription,int taskId){
         this.taskDescription = taskDescription;
+        this.taskId = taskId + 1;
         this.isDone = false;
     }
 
     Task(){
-        this("");
+        this("",0);
     }
 
     public String displayStatusSymbol(){
@@ -23,7 +25,9 @@ public class Task {
         isDone = true;
     }
 
+    public int getTaskId(){
+        return taskId;
+    }
 
-
-
+    abstract String displayItem();
 }
