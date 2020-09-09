@@ -2,34 +2,43 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static int addTaskItem(Task[] TaskList, String item, int numOfItems, String typeOfTask){
+    public static int addTaskItem(Task[] TaskList, String item, int numOfItems, String typeOfTask) throws Exception {
 
         switch(typeOfTask){
         case "todo":
+            if(item.equals("")){
+                throw new Exception("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+
             TaskList[numOfItems] = new Todo(item,numOfItems);
             break;
 
         case "deadline":
+            if(item.equals("")){
+                throw new Exception("☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
             if(item.contains("/by")) {
                 String dateOfDeadline = item.substring(item.indexOf("/by"));
                 TaskList[numOfItems] = new Deadline(item.substring(0, item.indexOf("/by") - 1), dateOfDeadline, numOfItems);
             }else{
-                TaskList[numOfItems] = new Deadline(item,numOfItems);
+                throw new Exception("☹ OOPS!!! Deadline needs to contain the date");
             }
             break;
 
         case "event":
+            if(item.equals("")){
+                throw new Exception("☹ OOPS!!! The description of a event cannot be empty.");
+            }
             if(item.contains("/at")) {
                 String dateOfEvent = item.substring(item.indexOf("/at"));
                 TaskList[numOfItems] = new Event(item.substring(0, item.indexOf("/at") - 1), dateOfEvent, numOfItems);
             }else{
-                TaskList[numOfItems] = new Event(item,numOfItems);
+                throw new Exception("☹ OOPS!!! Event needs to contain the date");
             }
             break;
 
         default:
-            System.out.println("Not a valid Task");
-            return numOfItems;
+            throw new Exception("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         System.out.println("Got it. I've added this task: ");
@@ -79,7 +88,9 @@ public class Duke {
                     } else {
 
                     String typeOfTask = "";
+
                     if(lineInputWords[0].compareToIgnoreCase("todo") == 0){
+                        System.out.println(lineInputWords[0]);
                         typeOfTask = "todo";
                     }
 
@@ -91,8 +102,14 @@ public class Duke {
                     typeOfTask = "event";
                     }
 
-                    lineInput = lineInput.replaceFirst(lineInputWords[0] + " ", ""); //removes the todo,event and deadline text piece
-                    numOfTasks = addTaskItem(TaskList, lineInput, numOfTasks,typeOfTask);
+                    lineInput = lineInput.replaceFirst(lineInputWords[0] , ""); //removes the todo,event and deadline text piece
+
+                    try{
+                        numOfTasks = addTaskItem(TaskList, lineInput, numOfTasks,typeOfTask);
+                    }catch(Exception e){
+                        System.out.println(e.getMessage());
+                    }
+
                     }
 
                 lineInput = input.nextLine();
