@@ -20,7 +20,7 @@ public class Event extends Task{
     }
 
     public String displayItem(){
-        if(dateOfEvent.compareTo("") != 0) {
+        if (dateOfEvent.compareTo("") != 0) {
             return getTaskId() + ". " + "[E]" + "[" + displayStatusSymbol() + "]" + " " + getTaskDescription() + getFormattedDate();
         }
 

@@ -4,39 +4,36 @@ public class Duke {
 
     public static int addTaskItem(Task[] TaskList, String item, int numOfItems, String typeOfTask) throws Exception {
 
-        switch(typeOfTask){
+        switch (typeOfTask) {
         case "todo":
-            if(item.equals("")){
+            if (item.equals("")) {
                 throw new Exception("☹ OOPS!!! The description of a todo cannot be empty.");
             }
 
             TaskList[numOfItems] = new Todo(item,numOfItems);
             break;
-
         case "deadline":
-            if(item.equals("")){
+            if (item.equals("")) {
                 throw new Exception("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-            if(item.contains("/by")) {
+            if (item.contains("/by")) {
                 String dateOfDeadline = item.substring(item.indexOf("/by"));
                 TaskList[numOfItems] = new Deadline(item.substring(0, item.indexOf("/by") - 1), dateOfDeadline, numOfItems);
-            }else{
+            } else {
                 throw new Exception("☹ OOPS!!! Deadline needs to contain the date");
             }
             break;
-
         case "event":
-            if(item.equals("")){
+            if (item.equals("")) {
                 throw new Exception("☹ OOPS!!! The description of a event cannot be empty.");
             }
-            if(item.contains("/at")) {
+            if (item.contains("/at")) {
                 String dateOfEvent = item.substring(item.indexOf("/at"));
                 TaskList[numOfItems] = new Event(item.substring(0, item.indexOf("/at") - 1), dateOfEvent, numOfItems);
-            }else{
+            } else {
                 throw new Exception("☹ OOPS!!! Event needs to contain the date");
             }
             break;
-
         default:
             throw new Exception("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -47,8 +44,8 @@ public class Duke {
         return numOfItems;
     }
 
-    public static void listTasks(Task[] TaskList, int numOfItems){
-        for(int i = 0; i < numOfItems; i++){
+    public static void listTasks(Task[] TaskList, int numOfItems) {
+        for (int i = 0; i < numOfItems; i++) {
             System.out.println(TaskList[i].displayItem());
         }
     }
@@ -70,16 +67,16 @@ public class Duke {
         System.out.print("What can I do for you?\n");
         lineInput = input.nextLine();
 
-        while(lineInput.compareToIgnoreCase("bye") != 0){
+        while (lineInput.compareToIgnoreCase("bye") != 0) {
             String []lineInputWords = lineInput.split(" ");
 
-            if(lineInputWords[0].compareToIgnoreCase("done") == 0){
+            if (lineInputWords[0].compareToIgnoreCase("done") == 0) {
                 int taskId = Integer.parseInt(lineInputWords[1]) - 1;
-                if(taskId < numOfTasks){
+                if (taskId < numOfTasks) {
                     TaskList[taskId].setIsDone();
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println(TaskList[taskId].displayItem());
-                } else{
+                } else {
                     System.out.println("task not in list");
                 }
 
@@ -89,30 +86,29 @@ public class Duke {
 
                         String typeOfTask = "";
 
-                        if(lineInputWords[0].compareToIgnoreCase("todo") == 0){
+                        if (lineInputWords[0].compareToIgnoreCase("todo") == 0) {
                             System.out.println(lineInputWords[0]);
                             typeOfTask = "todo";
                         }
 
-                        if(lineInputWords[0].compareToIgnoreCase("deadline") == 0){
+                        if (lineInputWords[0].compareToIgnoreCase("deadline") == 0) {
                             typeOfTask = "deadline";
                         }
 
-                        if(lineInputWords[0].compareToIgnoreCase("event") == 0){
+                        if (lineInputWords[0].compareToIgnoreCase("event") == 0) {
                             typeOfTask = "event";
                         }
 
                         lineInput = lineInput.replaceFirst(lineInputWords[0] , ""); //removes the todo,event and deadline text piece
 
-                        try{
+                        try {
                             numOfTasks = addTaskItem(TaskList, lineInput, numOfTasks,typeOfTask);
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
 
                     }
-
-                lineInput = input.nextLine();
+            lineInput = input.nextLine();
         }
 
         System.out.println("\tBye. Hope to see you again soon!");

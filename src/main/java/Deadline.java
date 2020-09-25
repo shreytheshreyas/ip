@@ -20,7 +20,7 @@ public class Deadline extends Task{
     }
 
     public String displayItem(){
-        if(dateOfDeadline.compareTo("") != 0) {
+        if (dateOfDeadline.compareTo("") != 0) {
             return getTaskId() + ". " + "[D]" + "[" + displayStatusSymbol() + "]" + " " + getTaskDescription() + getFormattedDate();
         }
 
