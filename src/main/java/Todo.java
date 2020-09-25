@@ -8,6 +8,6 @@ public class Todo extends Task{
     }
 
     public String displayItem(){
-        return getTaskId() + ". " + "[T]" + "[" + displayStatusSymbol() + "]"+ " " + getTaskDescription();
+        return getTaskId() + ". " + "[T]" + "[" + displayStatusSymbol() + "] " + getTaskDescription();
     }
 }

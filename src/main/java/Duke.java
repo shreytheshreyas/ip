@@ -87,28 +87,28 @@ public class Duke {
                     listTasks(TaskList,numOfTasks);
                     } else {
 
-                    String typeOfTask = "";
+                        String typeOfTask = "";
 
-                    if(lineInputWords[0].compareToIgnoreCase("todo") == 0){
-                        System.out.println(lineInputWords[0]);
-                        typeOfTask = "todo";
-                    }
+                        if(lineInputWords[0].compareToIgnoreCase("todo") == 0){
+                            System.out.println(lineInputWords[0]);
+                            typeOfTask = "todo";
+                        }
 
-                    if(lineInputWords[0].compareToIgnoreCase("deadline") == 0){
-                    typeOfTask = "deadline";
-                    }
+                        if(lineInputWords[0].compareToIgnoreCase("deadline") == 0){
+                            typeOfTask = "deadline";
+                        }
 
-                    if(lineInputWords[0].compareToIgnoreCase("event") == 0){
-                    typeOfTask = "event";
-                    }
+                        if(lineInputWords[0].compareToIgnoreCase("event") == 0){
+                            typeOfTask = "event";
+                        }
 
-                    lineInput = lineInput.replaceFirst(lineInputWords[0] , ""); //removes the todo,event and deadline text piece
+                        lineInput = lineInput.replaceFirst(lineInputWords[0] , ""); //removes the todo,event and deadline text piece
 
-                    try{
-                        numOfTasks = addTaskItem(TaskList, lineInput, numOfTasks,typeOfTask);
-                    }catch(Exception e){
-                        System.out.println(e.getMessage());
-                    }
+                        try{
+                            numOfTasks = addTaskItem(TaskList, lineInput, numOfTasks,typeOfTask);
+                        }catch(Exception e){
+                            System.out.println(e.getMessage());
+                        }
 
                     }
 

@@ -2,6 +2,8 @@ public abstract class Task {
     private  String taskDescription;
     private int taskId;
     private boolean isDone;
+    private static String TICK_MARK = "\u2713";
+    private static String CROSS_MARK = "\u2718";
 
     Task(String taskDescription,int taskId){
         this.taskDescription = taskDescription;
@@ -14,7 +16,7 @@ public abstract class Task {
     }
 
     public String displayStatusSymbol(){
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? TICK_MARK : CROSS_MARK);
     }
 
     public String getTaskDescription(){
