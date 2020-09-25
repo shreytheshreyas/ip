@@ -2,13 +2,12 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static int addTaskItem(Task[] TaskList, String item, int numOfItems, String typeOfTask){
+    public static int addTaskItem(Task[] TaskList, String item, int numOfItems, String typeOfTask) {
 
         switch(typeOfTask){
         case "todo":
             TaskList[numOfItems] = new Todo(item,numOfItems);
             break;
-
         case "deadline":
             if(item.contains("/by")) {
                 String dateOfDeadline = item.substring(item.indexOf("/by"));
@@ -17,7 +16,6 @@ public class Duke {
                 TaskList[numOfItems] = new Deadline(item,numOfItems);
             }
             break;
-
         case "event":
             if(item.contains("/at")) {
                 String dateOfEvent = item.substring(item.indexOf("/at"));
@@ -26,7 +24,6 @@ public class Duke {
                 TaskList[numOfItems] = new Event(item,numOfItems);
             }
             break;
-
         default:
             System.out.println("Not a valid Task");
             return numOfItems;
@@ -38,7 +35,7 @@ public class Duke {
         return numOfItems;
     }
 
-    public static void listTasks(Task[] TaskList, int numOfItems){
+    public static void listTasks(Task[] TaskList, int numOfItems) {
         for(int i = 0; i < numOfItems; i++){
             System.out.println(TaskList[i].displayItem());
         }
@@ -88,14 +85,14 @@ public class Duke {
                     }
 
                     if(lineInputWords[0].compareToIgnoreCase("event") == 0){
-                    typeOfTask = "event";
+                        typeOfTask = "event";
                     }
 
                     lineInput = lineInput.replaceFirst(lineInputWords[0] + " ", ""); //removes the todo,event and deadline text piece
-                    numOfTasks = addTaskItem(TaskList, lineInput, numOfTasks,typeOfTask);
+                        numOfTasks = addTaskItem(TaskList, lineInput, numOfTasks,typeOfTask);
                     }
 
-                lineInput = input.nextLine();
+            lineInput = input.nextLine();
         }
 
         System.out.println("\tBye. Hope to see you again soon!");
