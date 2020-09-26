@@ -5,14 +5,14 @@ public abstract class Task {
     private static String TICK_MARK = "\u2713";
     private static String CROSS_MARK = "\u2718";
 
-    Task(String taskDescription,int taskId){
+    Task(String taskDescription,int taskId,boolean isDone){
         this.taskDescription = taskDescription;
         this.taskId = taskId + 1;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     Task(){
-        this("",0);
+        this("",0,false);
     }
 
     public String displayStatusSymbol(){
@@ -27,6 +27,9 @@ public abstract class Task {
         isDone = true;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
     public int getTaskId(){
         return taskId;
     }

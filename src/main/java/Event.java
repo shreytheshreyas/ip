@@ -1,17 +1,20 @@
 public class Event extends Task{
     private String dateOfEvent;
 
-    Event(String eventDescription, String dateOfEvent, int eventTaskId){
-        super(eventDescription, eventTaskId);
+    Event(String eventDescription, String dateOfEvent, int eventTaskId, boolean isdone){
+        super(eventDescription, eventTaskId,isdone);
         this.dateOfEvent = dateOfEvent;
     }
 
+    Event(String eventDescription, String dateOfEvent, int eventTaskId) {
+        this(eventDescription,dateOfEvent,eventTaskId,false);
+    }
     Event(String eventDescription, int eventTaskId){
-        this(eventDescription,"",eventTaskId);
+        this(eventDescription,"",eventTaskId,false);
     }
 
     Event(){
-        this("","",0);
+        this("","",0,false);
     }
 
     public String getFormattedDate(){
