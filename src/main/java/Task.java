@@ -11,24 +11,28 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    Task(){
+    Task() {
         this("",0);
     }
 
-    public String displayStatusSymbol(){
+    public String displayStatusSymbol() {
         return (isDone ? TICK_MARK : CROSS_MARK);
     }
 
-    public String getTaskDescription(){
+    public String getTaskDescription() {
         return taskDescription;
     }
 
-    public void setIsDone(){
+    public void setIsDone() {
         isDone = true;
     }
 
     public int getTaskId(){
         return taskId;
+    }
+
+    public void updateTaskId (int newTaskId) {
+        taskId = newTaskId;
     }
 
     abstract String displayItem();

@@ -17,7 +17,13 @@ public class TaskList {
         }
     }
 
-    public int addTaskItem(ArrayList<Task> taskList, String item, int numOfItems, String typeOfTask) throws Exception {
+    public void updateTaskListIdOrder() {
+        for (int i = 0; i < numOfTasks; i++) {
+            taskList.get(i).updateTaskId(i+1);
+        }
+    }
+
+    public void addTaskItem(String item, String typeOfTask) throws Exception {
 
         switch (typeOfTask) {
         case "todo":
@@ -25,7 +31,7 @@ public class TaskList {
                 exceptionHandler.exceptionType("todo");
             }
 
-            taskList.add(new Todo(item,numOfItems));
+            taskList.add(new Todo(item,numOfTasks));
             break;
         case "deadline":
             if (item.equals("")) {
@@ -33,7 +39,7 @@ public class TaskList {
             }
             if (item.contains("/by")) {
                 String dateOfDeadline = item.substring(item.indexOf("/by"));
-                taskList.add(new Deadline(item.substring(0, item.indexOf("/by") - 1), dateOfDeadline, numOfItems));
+                taskList.add(new Deadline(item.substring(0, item.indexOf("/by") - 1), dateOfDeadline, numOfTasks));
             } else {
                 exceptionHandler.exceptionType("deadline date");
             }
@@ -44,7 +50,7 @@ public class TaskList {
             }
             if (item.contains("/at")) {
                 String dateOfEvent = item.substring(item.indexOf("/at"));
-                taskList.add(new Event(item.substring(0, item.indexOf("/at") - 1), dateOfEvent, numOfItems));
+                taskList.add(new Event(item.substring(0, item.indexOf("/at") - 1), dateOfEvent, numOfTasks));
             } else {
                 exceptionHandler.exceptionType("event date");
             }
@@ -54,9 +60,17 @@ public class TaskList {
         }
 
         System.out.println("Got it. I've added this task: ");
-        System.out.println("\t" + taskList.get(numOfItems++).displayItem());
-        System.out.println("Now you have " + numOfItems + " tasks in the list.");
-        return numOfItems;
+        System.out.println("\t" + taskList.get(numOfTasks++).displayItem());
+        System.out.println("Now you have " + numOfTasks + " tasks in the list.");
+    }
+
+    public void deleteTaskItem(int taskId) {
+        System.out.println("Got it. I've removed this task: ");
+        System.out.println("\t" + taskList.get(taskId).displayItem());
+        taskList.remove(taskList.get(taskId));
+        numOfTasks--;
+        System.out.println("Now you have " + numOfTasks + " tasks in the list.");
+        updateTaskListIdOrder();
     }
 
     public void parseUserInput(String userInput) throws Exception{
@@ -66,7 +80,6 @@ public class TaskList {
             if (userInputWords.length == 1) {
                 exceptionHandler.exceptionType("task done");
             }
-
             int taskId = Integer.parseInt(userInputWords[1]) - 1;
             if (taskId < numOfTasks) {
                 taskList.get(taskId).setIsDone();
@@ -76,8 +89,18 @@ public class TaskList {
                 System.out.println("task not in list");
             }
 
-        }else if (userInput.compareToIgnoreCase("list") == 0) {
+        } else if (userInput.compareToIgnoreCase("list") == 0) {
             listTasks(taskList,numOfTasks);
+        } else if (userInputWords[0].compareToIgnoreCase("delete") == 0) {
+            if (userInputWords.length == 1) {
+                exceptionHandler.exceptionType("task delete");
+            }
+            int taskId = Integer.parseInt(userInputWords[1]) - 1;
+            if (taskId < numOfTasks) {
+                deleteTaskItem(taskId);
+            } else {
+                System.out.println("task not in list");
+            }
         } else {
 
             String typeOfTask = "";
@@ -97,10 +120,7 @@ public class TaskList {
 
             String updatedInput = userInput.replaceFirst(userInputWords[0] , ""); //removes the todo,event and deadline text piece
 
-
-            numOfTasks = addTaskItem(taskList, updatedInput, numOfTasks,typeOfTask);
-            
-
+            addTaskItem(updatedInput, typeOfTask);
         }
     }
 }

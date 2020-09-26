@@ -14,6 +14,7 @@ public class DukeExceptions extends Exception{
         exceptionMessages.put("event date","☹ OOPS!!! Event needs to contain the date");
         exceptionMessages.put("task done","☹ OOPS!!! You have got to specify the task number");
         exceptionMessages.put("default","☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        exceptionMessages.put("task delete","☹ OOPS!!! You have got to specify the task number");
     }
 
     public void exceptionType(String type) throws Exception {
