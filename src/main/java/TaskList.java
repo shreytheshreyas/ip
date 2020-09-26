@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList; //Made use of ArrayList Collection
     private int numOfTasks;
     public DukeExceptions exceptionHandler;
 

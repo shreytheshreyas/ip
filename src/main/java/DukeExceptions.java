@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class DukeExceptions extends Exception{
 
-    private HashMap<String,String> exceptionMessages;
+    private final HashMap<String,String> exceptionMessages; // Made use of HashMap collection
 
     DukeExceptions() {
         exceptionMessages = new HashMap<>();
