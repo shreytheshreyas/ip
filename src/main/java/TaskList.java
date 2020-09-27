@@ -13,7 +13,7 @@ public class TaskList {
         dukeFileHandler = new FileHandler();
         taskList = new ArrayList<>();
         retrieveArrayListInfo();
-        numOfTasks = 0;
+        numOfTasks = taskList.isEmpty() ? 0 : taskList.size();
         exceptionHandler = new DukeExceptions();
     }
 

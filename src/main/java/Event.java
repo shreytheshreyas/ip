@@ -22,6 +22,9 @@ public class Event extends Task{
         return " (" + dateOfEvent + ")";
     }
 
+    public String getFileFormattedDate() {
+        return dateOfEvent.replaceFirst("at: ","");
+    }
     public String displayItem(){
         if (dateOfEvent.compareTo("") != 0) {
             return getTaskId() + ". " + "[E]" + "[" + displayStatusSymbol() + "]" + " " + getTaskDescription() + getFormattedDate();

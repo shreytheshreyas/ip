@@ -11,14 +11,14 @@ public class FileHandler {
 
     //constructor
     FileHandler () {
-        dukeFile = new File ("data/duke.txt");
+        dukeFile = new File ("duke.txt");
     }
     //create file
     public void createFile () {
         final Formatter x;
 
         try {
-            x = new Formatter("data/duke.txt");
+            x = new Formatter("duke.txt");
             System.out.println("New file was created");
         } catch (Exception e) {
             System.out.println("File cannot be created");
@@ -36,12 +36,18 @@ public class FileHandler {
 
         while(fileScanner.hasNext()) {
             String fileText = fileScanner.nextLine();
-            String[] fileTextWords = fileText.split(" | ");
+            String[] fileTextWords = fileText.split(" \\| ");
             boolean isDone = fileTextWords[1].equals("1");
             switch(fileTextWords[0]) {
-            case "T": taskList.add(new Todo(fileTextWords[2],numOfTasks++,isDone));
-            case "D": taskList.add(new Deadline(fileTextWords[2],fileTextWords[3],numOfTasks++,isDone));
-            case "E": taskList.add(new Event(fileTextWords[2],fileTextWords[3],numOfTasks++,isDone));
+            case "T":
+                taskList.add(new Todo(fileTextWords[2],numOfTasks++,isDone));
+                break;
+            case "D":
+                taskList.add(new Deadline(fileTextWords[2],"by: " + fileTextWords[3],numOfTasks++,isDone));
+                break;
+            case "E":
+                taskList.add(new Event(fileTextWords[2],"at: " + fileTextWords[3],numOfTasks++,isDone));
+                break;
             }
         }
 
@@ -55,9 +61,9 @@ public class FileHandler {
             if (t instanceof Todo) {
                 dukeFileWriter.write("T | " + isTaskDone + " | "+ t.getTaskDescription() + System.lineSeparator());
             } else if (t instanceof Deadline) {
-                dukeFileWriter.write("D | " + isTaskDone + " | " + t.getTaskDescription() + " | " + ((Deadline) t).getFormattedDate() + System.lineSeparator());
+                dukeFileWriter.write("D | " + isTaskDone + " | " + t.getTaskDescription() + " | " + ((Deadline) t).getFileFormattedDate() + System.lineSeparator());
             } else if(t instanceof Event){
-                dukeFileWriter.write("E | " + isTaskDone + " | " + t.getTaskDescription() + " | " + ((Event) t).getFormattedDate() + System.lineSeparator());
+                dukeFileWriter.write("E | " + isTaskDone + " | " + t.getTaskDescription() + " | " + ((Event) t).getFileFormattedDate() + System.lineSeparator());
             }
         }
 

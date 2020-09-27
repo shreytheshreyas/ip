@@ -21,6 +21,9 @@ public class Deadline extends Task{
         return " (" + dateOfDeadline + ")";
     }
 
+    public String getFileFormattedDate() {
+        return dateOfDeadline.replaceFirst("by: ","");
+    }
     public String displayItem(){
         if (dateOfDeadline.compareTo("") != 0) {
             return getTaskId() + ". " + "[D]" + "[" + displayStatusSymbol() + "]" + " " + getTaskDescription() + getFormattedDate();
