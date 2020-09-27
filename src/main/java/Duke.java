@@ -27,6 +27,7 @@ public class Duke {
             lineInput = input.nextLine();
         }
 
+        myTaskList.saveData();
         System.out.println("\tBye. Hope to see you again soon!");
     }
 }

@@ -1,14 +1,28 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class TaskList {
     private final ArrayList<Task> taskList; //Made use of ArrayList Collection
     private int numOfTasks;
-    public DukeExceptions exceptionHandler;
+    private final FileHandler dukeFileHandler;
+    private final DukeExceptions exceptionHandler;
 
     public TaskList() {
+        dukeFileHandler = new FileHandler();
         taskList = new ArrayList<>();
-        numOfTasks = 0;
+        retrieveArrayListInfo();
+        numOfTasks = taskList.isEmpty() ? 0 : taskList.size();
         exceptionHandler = new DukeExceptions();
+    }
+
+    public void retrieveArrayListInfo(){
+        try{
+            dukeFileHandler.readDataFromFile(taskList);
+        } catch (FileNotFoundException e){
+            System.out.println("Something went wrong");
+        }
     }
 
     public void listTasks(ArrayList<Task> taskList, int numOfItems) {
@@ -121,6 +135,13 @@ public class TaskList {
             String updatedInput = userInput.replaceFirst(userInputWords[0] , ""); //removes the todo,event and deadline text piece
 
             addTaskItem(updatedInput, typeOfTask);
+        }
+    }
+    public void saveData() {
+        try{
+            dukeFileHandler.writeDataToFile(taskList);
+        } catch (IOException e) {
+            System.out.println("Something went wrong");
         }
     }
 }

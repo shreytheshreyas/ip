@@ -1,17 +1,19 @@
 public class Deadline extends Task{
     private String dateOfDeadline;
 
-    Deadline(String deadlineDescription, String dateOfDeadline,int deadlineTaskId){
-        super(deadlineDescription,deadlineTaskId);
+    Deadline(String deadlineDescription, String dateOfDeadline,int deadlineTaskId,boolean isDone){
+        super(deadlineDescription,deadlineTaskId,isDone);
         this.dateOfDeadline = dateOfDeadline;
     }
-
+    Deadline(String deadlineDescription,String dateOfDeadline, int deadlineTaskId){
+        this(deadlineDescription,dateOfDeadline,deadlineTaskId,false);
+    }
     Deadline(String deadlineDescription, int deadlineTaskId){
-        this(deadlineDescription,"",deadlineTaskId);
+        this(deadlineDescription,"",deadlineTaskId,false);
     }
 
     Deadline(){
-        this("","",0);
+        this("","",0,false);
     }
 
     public String getFormattedDate(){
@@ -19,6 +21,9 @@ public class Deadline extends Task{
         return " (" + dateOfDeadline + ")";
     }
 
+    public String getFileFormattedDate() {
+        return dateOfDeadline.replaceFirst("by: ","");
+    }
     public String displayItem(){
         if (dateOfDeadline.compareTo("") != 0) {
             return getTaskId() + ". " + "[D]" + "[" + displayStatusSymbol() + "]" + " " + getTaskDescription() + getFormattedDate();
