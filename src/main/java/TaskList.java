@@ -21,7 +21,7 @@ public class TaskList {
         try{
             dukeFileHandler.readDataFromFile(taskList);
         } catch (FileNotFoundException e){
-            System.out.println("Something went wrong");
+            exceptionHandler.fileExceptionType("data retrieval");
         }
     }
 
@@ -42,35 +42,35 @@ public class TaskList {
         switch (typeOfTask) {
         case "todo":
             if (item.equals("")) {
-                exceptionHandler.exceptionType("todo");
+                exceptionHandler.addTaskExceptionType("todo");
             }
 
             taskList.add(new Todo(item,numOfTasks));
             break;
         case "deadline":
             if (item.equals("")) {
-                exceptionHandler.exceptionType("deadline description");
+                exceptionHandler.addTaskExceptionType("deadline description");
             }
             if (item.contains("/by")) {
                 String dateOfDeadline = item.substring(item.indexOf("/by"));
                 taskList.add(new Deadline(item.substring(0, item.indexOf("/by") - 1), dateOfDeadline, numOfTasks));
             } else {
-                exceptionHandler.exceptionType("deadline date");
+                exceptionHandler.addTaskExceptionType("deadline date");
             }
             break;
         case "event":
             if (item.equals("")) {
-                exceptionHandler.exceptionType("event description");
+                exceptionHandler.addTaskExceptionType("event description");
             }
             if (item.contains("/at")) {
                 String dateOfEvent = item.substring(item.indexOf("/at"));
                 taskList.add(new Event(item.substring(0, item.indexOf("/at") - 1), dateOfEvent, numOfTasks));
             } else {
-                exceptionHandler.exceptionType("event date");
+                exceptionHandler.addTaskExceptionType("event date");
             }
             break;
         default:
-            exceptionHandler.exceptionType("default");
+            exceptionHandler.addTaskExceptionType("default");
         }
 
         System.out.println("Got it. I've added this task: ");
@@ -92,7 +92,7 @@ public class TaskList {
 
         if (userInputWords[0].compareToIgnoreCase("done") == 0) {
             if (userInputWords.length == 1) {
-                exceptionHandler.exceptionType("task done");
+                exceptionHandler.addTaskExceptionType("task done");
             }
             int taskId = Integer.parseInt(userInputWords[1]) - 1;
             if (taskId < numOfTasks) {
@@ -107,7 +107,7 @@ public class TaskList {
             listTasks(taskList,numOfTasks);
         } else if (userInputWords[0].compareToIgnoreCase("delete") == 0) {
             if (userInputWords.length == 1) {
-                exceptionHandler.exceptionType("task delete");
+                exceptionHandler.addTaskExceptionType("task delete");
             }
             int taskId = Integer.parseInt(userInputWords[1]) - 1;
             if (taskId < numOfTasks) {
@@ -141,7 +141,7 @@ public class TaskList {
         try{
             dukeFileHandler.writeDataToFile(taskList);
         } catch (IOException e) {
-            System.out.println("Something went wrong");
+            exceptionHandler.fileExceptionType("data storage");
         }
     }
 }

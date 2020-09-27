@@ -14,12 +14,17 @@ public class DukeExceptions extends Exception{
         exceptionMessages.put("event date","☹ OOPS!!! Event needs to contain the date");
         exceptionMessages.put("task done","☹ OOPS!!! You have got to specify the task number");
         exceptionMessages.put("task delete","☹ OOPS!!! You have got to specify the task number");
-        //exceptionMessages.put("data retreival","☹ OOPS!!! The file could not be found");
+        exceptionMessages.put("data retrieval","☹ OOPS!!! The file could not be found");
+        exceptionMessages.put("data storage","☹ OOPS!!! The data could not be written to the file");
         exceptionMessages.put("default","☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    public void exceptionType(String type) throws Exception {
+    public void addTaskExceptionType(String type) throws Exception {
         throw new Exception(exceptionMessages.get(type));
+    }
+
+    public void fileExceptionType(String type) {
+        System.out.println(exceptionMessages.get(type));
     }
 }
 

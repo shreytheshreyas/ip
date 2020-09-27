@@ -2,3 +2,4 @@ T | 1 |  finish task1
 D | 1 |  finsh task2 | friday
 E | 0 |  finish task3 | saturday
 D | 1 |  finish task5 | tonight
+E | 0 |  attend meeting | tuesday
