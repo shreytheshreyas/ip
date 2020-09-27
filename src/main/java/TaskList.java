@@ -87,6 +87,23 @@ public class TaskList {
         updateTaskListIdOrder();
     }
 
+    public void findTask(String keyword){
+        boolean taskFound = false;
+
+        for(Task t:taskList) {
+            if(t.displayItem().contains(keyword)) {
+                if(!taskFound) {
+                    taskFound = true;
+                    System.out.println("Here are the matching tasks in your list: ");
+                }
+                System.out.println(t.displayItem());
+            }
+        }
+        if(!taskFound) {
+            System.out.println("No Task in the list contains the keyword you entered");
+        }
+    }
+
     public void parseUserInput(String userInput) throws Exception{
         String []userInputWords = userInput.split(" ");
 
@@ -115,6 +132,9 @@ public class TaskList {
             } else {
                 System.out.println("task not in list");
             }
+        } else if (userInputWords[0].compareToIgnoreCase("find") == 0){
+            String requiredKeyword = userInputWords[1];
+            findTask(requiredKeyword);
         } else {
 
             String typeOfTask = "";
