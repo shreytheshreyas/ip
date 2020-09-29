@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Ui {
-    private String logo;
-    private Parser myParser;
+    private final String logo;
+    private final Parser myParser;
     //constructor
     public Ui() {
         myParser = new Parser();

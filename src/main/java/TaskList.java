@@ -17,6 +17,7 @@ public class TaskList {
         exceptionHandler = new DukeExceptions();
     }
 
+    //This function is used to retrieve the stored information from the file, duke.txt.
     public void retrieveArrayListInfo(){ //TaskList
         try{
             dukeFileHandler.readDataFromFile(taskList);
@@ -25,6 +26,7 @@ public class TaskList {
         }
     }
 
+    //This function is used to save information into a file, duke.txt
     public void saveData() { //TaskList
         try{
             dukeFileHandler.writeDataToFile(taskList);
@@ -43,12 +45,23 @@ public class TaskList {
         }
     }
 
-    public void updateTaskListIdOrder() { //TaskList
+    //Function used to update taskId after deletion of a task
+    public void updateTaskListIdOrder() {
         for (int i = 0; i < numOfTasks; i++) {
             taskList.get(i).updateTaskId(i+1);
         }
     }
 
+    /**
+     * This is a function that adds a task item to the array list
+     * according to the type of task entered by the user.
+     * <p>
+     * This function throws an exception if the description or
+     * date(for deadlines and events) is not mentioned
+     *
+     * @param item Description of a certain task.
+     * @param typeOfTask Task type - todo, deadline, event
+     * */
     public void addTaskItem(String item, String typeOfTask) throws Exception { //TaskList
 
         switch (typeOfTask) {
@@ -99,6 +112,13 @@ public class TaskList {
         updateTaskListIdOrder();
     }
 
+    /**
+     * This function takes in a keyword as a parameter and
+     * finds all tasks that contain that keyword and displays
+     * it on the screen.
+     *
+     * @param keyword String that is entered by the user to find a task that contains it.
+     * */
     public void findTask(String keyword){  // TaskList
         boolean taskFound = false;
 
@@ -129,58 +149,5 @@ public class TaskList {
         return taskList.get(taskId).displayItem();
     }
 
-//    public void parseUserInput(String userInput) throws Exception{ //Paser
-//        String []userInputWords = userInput.split(" ");
-//
-//        if (userInputWords[0].compareToIgnoreCase("done") == 0) {
-//            if (userInputWords.length == 1) {
-//                exceptionHandler.addTaskExceptionType("task done");
-//            }
-//            int taskId = Integer.parseInt(userInputWords[1]) - 1;
-//            if (taskId < numOfTasks) {
-//                taskList.get(taskId).setIsDone();
-//                System.out.println("Nice! I've marked this task as done: ");
-//                System.out.println(taskList.get(taskId).displayItem());
-//            } else {
-//                System.out.println("task not in list");
-//            }
-//
-//        } else if (userInput.compareToIgnoreCase("list") == 0) {
-//            listTasks(taskList,numOfTasks);
-//        } else if (userInputWords[0].compareToIgnoreCase("delete") == 0) {
-//            if (userInputWords.length == 1) {
-//                exceptionHandler.addTaskExceptionType("task delete");
-//            }
-//            int taskId = Integer.parseInt(userInputWords[1]) - 1;
-//            if (taskId < numOfTasks) {
-//                deleteTaskItem(taskId);
-//            } else {
-//                System.out.println("task not in list");
-//            }
-//        } else if (userInputWords[0].compareToIgnoreCase("find") == 0){
-//            String requiredKeyword = userInputWords[1];
-//            findTask(requiredKeyword);
-//        } else {
-//
-//            String typeOfTask = "";
-//
-//            if (userInputWords[0].compareToIgnoreCase("todo") == 0) {
-//                System.out.println(userInputWords[0]);
-//                typeOfTask = "todo";
-//            }
-//
-//            if (userInputWords[0].compareToIgnoreCase("deadline") == 0) {
-//                typeOfTask = "deadline";
-//            }
-//
-//            if (userInputWords[0].compareToIgnoreCase("event") == 0) {
-//                typeOfTask = "event";
-//            }
-//
-//            String updatedInput = userInput.replaceFirst(userInputWords[0] , ""); //removes the todo,event and deadline text piece
-//
-//            addTaskItem(updatedInput, typeOfTask);
-//        }
-//    }
 
 }

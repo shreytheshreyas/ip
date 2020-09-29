@@ -21,6 +21,17 @@ public class Parser {
         return typeOfTask;
     }
 
+    /**
+     * Responsible for handling a input that is given by the user
+     * for task recording such as add and deleting tasks and listing
+     * all previously entered tasks. The function saves the data after
+     * after the conclusion of each command
+     * <p>
+     * The function also throws custom exceptions if the input entered by
+     * user does not make logical sense
+     *
+     * @param userInput The input that is entered by the user in the program
+     **/
     public void parseUserInput(String userInput) throws Exception{
         String []userInputWords = userInput.split(" ");
 

@@ -17,11 +17,12 @@ public class Event extends Task{
         this("","",0,false);
     }
 
+    //returns date in the required UI format.
     public String getFormattedDate(){
         dateOfEvent = dateOfEvent.replaceFirst("/at","at:");
         return " (" + dateOfEvent + ")";
     }
-
+    //return the date in the required file format.
     public String getFileFormattedDate() {
         return dateOfEvent.replaceFirst("at: ","");
     }
