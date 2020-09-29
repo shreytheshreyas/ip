@@ -24,6 +24,7 @@ public class Deadline extends Task{
     public String getFileFormattedDate() {
         return dateOfDeadline.replaceFirst("by: ","");
     }
+    //Make use of toString instead of displayItem()
     public String displayItem(){
         if (dateOfDeadline.compareTo("") != 0) {
             return getTaskId() + ". " + "[D]" + "[" + displayStatusSymbol() + "]" + " " + getTaskDescription() + getFormattedDate();

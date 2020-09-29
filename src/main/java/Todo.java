@@ -10,6 +10,7 @@ public class Todo extends Task{
         this("",0,false);
     }
 
+    //Make use of toString
     public String displayItem(){
         return getTaskId() + ". " + "[T]" + "[" + displayStatusSymbol() + "] " + getTaskDescription();
     }
