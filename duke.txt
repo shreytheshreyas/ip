@@ -2,3 +2,4 @@ T | 1 |  Buy groceries in the evening
 E | 0 |  Meet friends for dinner | clarke quay
 T | 1 |  go for evening walk 
 D | 0 |  finish assignment | friday
+
