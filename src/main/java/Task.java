@@ -1,9 +1,9 @@
 public abstract class Task {
-    private  String taskDescription;
+    private final String taskDescription;
     private int taskId;
     private boolean isDone;
-    private static String TICK_MARK = "\u2713";
-    private static String CROSS_MARK = "\u2718";
+    private static final String TICK_MARK = "\u2713";
+    private static final String CROSS_MARK = "\u2718";
 
     Task(String taskDescription,int taskId,boolean isDone){
         this.taskDescription = taskDescription;

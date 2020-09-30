@@ -9,7 +9,6 @@ import java.io.IOException;
 public class FileHandler {
     private final File dukeFile;
 
-    //constructor
     FileHandler () {
         dukeFile = new File ("duke.txt");
     }
@@ -25,7 +24,15 @@ public class FileHandler {
         }
     }
 
-    //open and read data from file
+    /**
+     * This function takes in an ArrayList as its parameters
+     * and read the contents from a file called duke.txt
+     * and stores this information in the array list.
+     * <p>
+     * The function throws an exception if the file is not
+     * found.
+     * @param taskList An ArrayList used to store the data from the file.
+     * */
     public void  readDataFromFile(ArrayList<Task> taskList) throws FileNotFoundException {
         if (!dukeFile.exists()) {
             createFile();
@@ -53,6 +60,16 @@ public class FileHandler {
 
     }
     //open and write/append data into file
+    /**
+     * This function takes an array list which contains the
+     * information entered by the user in the application
+     * and writes it to a file called duke.txt
+     * <p>
+     * The function throws an exception if there is a
+     * problem in writing the contents to the file.
+     *
+     * @param taskList  An ArrayList used to store the data from the file.
+     * */
     public void writeDataToFile(ArrayList<Task> taskList) throws IOException{
         FileWriter dukeFileWriter = new FileWriter(dukeFile.getPath());
 
